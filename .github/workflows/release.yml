@@ -3,7 +3,7 @@ name: Release
 
 # Run on every dispatch with release tag as input
 on:
-  worklflow_dispatch:
+  workflow_dispatch:
     inputs:
       release:
         description: 'release tag'
