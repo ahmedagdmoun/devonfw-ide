@@ -1,11 +1,13 @@
 # Name of the workflow
 name: Release
 
-# Run on every commit tag which begins with "v" (e.g., "v0.1.4")
+# Run on every dispatch with release tag as input
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'release tag'
+        default: 'latest'
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
@@ -16,4 +18,5 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ github.event.inputs.release }}"
           prerelease: false
