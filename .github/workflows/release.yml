@@ -5,9 +5,12 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      release:
-        description: 'release tag'
-        default: 'latest'
+      major:
+        description: 'major version'
+      minor:
+        description: 'minor version'
+      patch:
+        description: 'patch'
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
@@ -15,19 +18,14 @@ jobs:
     # Create release 
     runs-on: ubuntu-latest
     steps:
-      - name: release without dots
-        run: |
-            input=${{ github.event.inputs.release }}
-            edited_input="${input//.}"
-            export edited_input
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: Release/${{github.event.inputs.release}}
-          name: ${{github.event.inputs.release}}
+          tag: Release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          name: ${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
           body: |
                 # Download
-                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.release }}/devonfw-ide-scripts-${{ github.event.inputs.release }}.tar.gz
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
                 
                 # Changes
-                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#$edited_input
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
