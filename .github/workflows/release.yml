@@ -15,14 +15,6 @@ jobs:
     # Create release 
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: zip files
-        uses: vimtor/action-zip@v1
-        with:
-          files: ./
-          dest: './bin/ide-release-${{ github.event.inputs.release }}.zip'
-
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
@@ -30,7 +22,7 @@ jobs:
           name: ${{github.event.inputs.release}}
           body: |
                 # Download
-                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/2022.04.003/devonfw-ide-scripts-2022.04.003.tar.gz
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.release }}/devonfw-ide-scripts-${{ github.event.inputs.release }}.tar.gz
                 
                 # Changes
                 https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#202204003
