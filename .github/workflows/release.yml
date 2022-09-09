@@ -19,10 +19,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    steps:
-      
-      - name: Checkout 
-        uses: actions/checkout@v3        
+    steps:      
       # Create release 
       - name: create gitHub release
         uses: ncipollo/release-action@v1
@@ -35,10 +32,4 @@ jobs:
                 
                 # Changes
                 https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
-  
-      # Create tag
-      - name: create tag
-        run: |
-          git tag release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          git push https://$secrets.BUILD_USER:$secrets.GHA_TOKEN@github.com/ahmedagdmoun/devonfw-ide.git
         
