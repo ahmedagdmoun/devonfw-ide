@@ -15,14 +15,14 @@ jobs:
     # Create release 
     runs-on: ubuntu-latest
     steps:
-      zip-files: create zip files
+      - name: zip files
         uses: actions/checkout@v2
         uses: vimtor/action-zip@v1
         with:
           files: ./
           dest: './bin/ide-release-${{ github.event.inputs.release }}.zip'
 
-      github-release: Create a GitHub release
+      - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
           tag: Release/${{github.event.inputs.release}}
