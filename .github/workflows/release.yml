@@ -19,7 +19,8 @@ jobs:
         run: |
             input=${{ github.event.inputs.release }}
             edited_input="${input//.}"
-            echo "${edited_input}"
+            export edited_input
+            envsubst < release.yml 
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
@@ -30,4 +31,4 @@ jobs:
                 https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.release }}/devonfw-ide-scripts-${{ github.event.inputs.release }}.tar.gz
                 
                 # Changes
-                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.release }}
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#$edited_input
