@@ -7,18 +7,21 @@ on:
     inputs:
       major:
         description: 'major version'
+        required: true
       minor:
         description: 'minor version'
+        required: true
       patch:
         description: 'patch'
+        required: true
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
-  create-release:
-    # Create release 
+  release:
     runs-on: ubuntu-latest
     steps:
-      - name: gitHub release
+      # Create release 
+      - name: create gitHub release
         uses: ncipollo/release-action@v1
         with:
           tag: Release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
@@ -29,3 +32,10 @@ jobs:
                 
                 # Changes
                 https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
+  
+      # Create tag
+      - name: create tag
+        run: |
+          git tag release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          git push origin master release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+        
