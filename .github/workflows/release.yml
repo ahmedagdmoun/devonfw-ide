@@ -22,27 +22,3 @@ jobs:
           prerelease: false
 
 # Create zip files
-name: Zip Files
-
-on:
-  release:
-    types: [published]
-
-jobs:
-  zip-files:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: vimtor/action-zip@v1
-        with:
-          files: ./
-          dest: './bin/ide-release-${{ github.event.inputs.release }}.zip'
-
-- name: Create a GitHub release
-      uses: ncipollo/release-action@v1
-      with:
-          tag: Release/${{github.event.inputs.release}}
-          name: ${{github.event.inputs.release}}
-          body: '# Download\nhttps://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/2022.04.003/devonfw-ide-scripts-2022.04.003.tar.gz\n
-                # Changes\nhttps://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#202204003'
-          artifacts: './bin/ide-release-${{ github.event.inputs.release }}.zip'
