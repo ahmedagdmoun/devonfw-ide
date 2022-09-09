@@ -28,6 +28,10 @@ jobs:
         with:
           tag: Release/${{github.event.inputs.release}}
           name: ${{github.event.inputs.release}}
-          body: '# Download\nhttps://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/2022.04.003/devonfw-ide-scripts-2022.04.003.tar.gz\n
-                # Changes\nhttps://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#202204003'
+          body: |
+                # Download
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/2022.04.003/devonfw-ide-scripts-2022.04.003.tar.gz
+                
+                # Changes
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#202204003
           artifacts: './bin/ide-release-${{ github.event.inputs.release }}.zip'
