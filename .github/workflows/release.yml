@@ -36,6 +36,6 @@ jobs:
       # Create tag
       - name: create tag
         run: |
-          git tag release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          git push origin master release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          git tag release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          git push https://$secrets.BUILD_USER:$secrets.GHA_TOKEN@github.com/ahmedagdmoun/devonfw-ide.git
         
