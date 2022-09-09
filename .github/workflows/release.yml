@@ -15,19 +15,19 @@ jobs:
     # Create release 
     runs-on: ubuntu-latest
     steps:
+      - name: release without dots
+        run: |
+            input=${{ github.event.inputs.release }}
+            edited_input="${input//.}"
+            echo edited_input
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
           tag: Release/${{github.event.inputs.release}}
           name: ${{github.event.inputs.release}}
-          run: |
-            input=${{ github.event.inputs.release }}
-            edited_input="${input//.}"
-            echo edited_input
           body: |
                 # Download
                 https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.release }}/devonfw-ide-scripts-${{ github.event.inputs.release }}.tar.gz
                 
                 # Changes
                 https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.release }}
-          artifacts: './bin/ide-release-${{ github.event.inputs.release }}.zip'
