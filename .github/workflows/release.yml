@@ -15,8 +15,9 @@ jobs:
     # Create release 
     runs-on: ubuntu-latest
     steps:
-      - name: zip files
+      - name: checkout
         uses: actions/checkout@v2
+      - name: zip files
         uses: vimtor/action-zip@v1
         with:
           files: ./
