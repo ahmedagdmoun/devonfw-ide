@@ -30,6 +30,7 @@ name: Zip Files
 
 jobs:
   zip-files:
+    name: "Release"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -39,6 +40,7 @@ jobs:
           dest: './bin/ide-release-${{ github.event.inputs.release }}.zip'
 
 - name: Create a GitHub release
+    name: "Release"
       uses: ncipollo/release-action@v1
       with:
           tag: Release/${{github.event.inputs.release}}
