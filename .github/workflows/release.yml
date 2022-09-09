@@ -20,6 +20,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      
+      - name: Checkout 
+        uses: actions/checkout@v2
+        
       # Create release 
       - name: create gitHub release
         uses: ncipollo/release-action@v1
