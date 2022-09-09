@@ -20,7 +20,6 @@ jobs:
             input=${{ github.event.inputs.release }}
             edited_input="${input//.}"
             export edited_input
-            envsubst < release.yml 
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
