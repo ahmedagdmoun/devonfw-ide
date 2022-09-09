@@ -19,7 +19,7 @@ jobs:
         run: |
             input=${{ github.event.inputs.release }}
             edited_input="${input//.}"
-            echo edited_input
+            echo "${edited_input}"
       - name: gitHub release
         uses: ncipollo/release-action@v1
         with:
