@@ -18,6 +18,7 @@ on:
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
   release:
+    needs: ahmedagdmoun/devonfw-ide/.github/workflows/build.yml@test
     runs-on: ubuntu-latest
     steps:      
       # Create release 
