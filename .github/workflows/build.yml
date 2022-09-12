@@ -1,9 +1,10 @@
 name: CI build
-on: 
+on:
   push:
     paths-ignore:
       - 'documentation/**'
     branches: [ master ]
+  workflow_call:
 jobs:
   build:
     runs-on: ubuntu-latest
