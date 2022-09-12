@@ -18,9 +18,11 @@ on:
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
   test:
-    uses: ahmedagdmoun/devonfw-ide/.github/workflows/test-windows.yml@test
+    uses: [ahmedagdmoun/devonfw-ide/.github/workflows/test-windows.yml@test, ahmedagdmoun/devonfw-ide/.github/workflows/test-macos.yml@test, ahmedagdmoun/devonfw-ide/.github/workflows/test-ubuntu.yml@test]
+  build:
+    uses: ahmedagdmoun/devonfw-ide/.github/workflows/build.yml@test
   release:
-    needs: test
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:      
       # Create release 
