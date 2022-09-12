@@ -2,6 +2,7 @@ name: CI Build MacOS
 on:
   schedule:
     - cron: '0 2 * * *'
+  workflow_call:
 jobs:
   check_commit:
     uses: devonfw/ide/.github/workflows/check-commit.yml@master
