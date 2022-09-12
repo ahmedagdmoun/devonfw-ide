@@ -25,6 +25,9 @@ jobs:
     uses: ahmedagdmoun/devonfw-ide/.github/workflows/test-ubuntu.yml@test
   build:
     uses: ahmedagdmoun/devonfw-ide/.github/workflows/build.yml@test
+    with:
+      SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+      SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
   release:
     needs: [test-windows, test-macos, test-ubuntu, build]
     runs-on: ubuntu-latest
