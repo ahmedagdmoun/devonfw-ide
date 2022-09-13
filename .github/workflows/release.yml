@@ -19,13 +19,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Build with Maven
-      run: mvn package --file pom.xml
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - name: Build project with Maven
+        run: mvn -B -ntp install
     - name: Nexus Repo Publish
       uses: sonatype-nexus-community/nexus-repo-github-action@master
       with:
