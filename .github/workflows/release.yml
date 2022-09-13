@@ -39,7 +39,7 @@ jobs:
         filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
   # create release
   release:
-    needs: [test-windows, test-macos, test-ubuntu, build]
+    #needs: [test-windows, test-macos, test-ubuntu, build]
     runs-on: ubuntu-latest
     steps:      
       # Create github release with the specified tag, name and body
