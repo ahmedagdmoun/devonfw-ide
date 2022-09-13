@@ -29,12 +29,6 @@ jobs:
           java-version: '11'
       - name: Build project with Maven
         run: mvn -B -ntp install
-      - name: show directory content
-        run: |
-          cd /home/runner/.m2/repository/com/devonfw/tools/ide/devonfw-ide-scripts/2022.08.002-SNAPSHOT/
-          ls
-          cd /home/runner/.m2/repository/com/devonfw/tools/
-          ls
       - name: Nexus Repo Publish
         uses: sonatype-nexus-community/nexus-repo-github-action@master
         with:
@@ -44,8 +38,8 @@ jobs:
           format: maven2
           repository: maven-central
           coordinates: groupId=com.devonfw artifactId=devonfw-ide-scripts version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          assets: extension=jar
-          filename: target/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.jar
+          assets: extension=tar.gz
+          filename: /home/runner/.m2/repository/com/devonfw/tools/ide/devonfw-ide-scripts/2022.08.002-SNAPSHOT/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}-SNAPSHOT.tar.gz
   # create release
   release:
     needs: build
