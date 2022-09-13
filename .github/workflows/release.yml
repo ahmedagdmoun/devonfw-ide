@@ -42,6 +42,7 @@ jobs:
         filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
   # create release
   release:
+    needs: build
     #needs: [test-windows, test-macos, test-ubuntu, build]
     runs-on: ubuntu-latest
     steps:      
