@@ -1,7 +1,7 @@
 # Name of the workflow
 name: Release
 
-# Run on every dispatch with release tag as input
+# Runs manually with major version, minor version and patch as input
 on:
   workflow_dispatch:
     inputs:
@@ -15,36 +15,34 @@ on:
         description: 'patch'
         required: true
 
-# Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
-  test-windows:
-    uses: ahmedagdmoun/devonfw-ide/.github/workflows/test-windows.yml@test
-  test-macos:
-    uses: ahmedagdmoun/devonfw-ide/.github/workflows/test-macos.yml@test
-  test-ubuntu:
-    uses: ahmedagdmoun/devonfw-ide/.github/workflows/test-ubuntu.yml@test
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-      - name: Build project with Maven
-        run: mvn -B -ntp install
-      - name: Deploy to OSSRH nexus
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-        run: mvn --settings .mvn/settings.xml -DskipTests=true -Darchetype.test.skip=true -Dmaven.install.skip=true -B -ntp deploy
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Build with Maven
+      run: mvn package --file pom.xml
+    - name: Nexus Repo Publish
+      uses: sonatype-nexus-community/nexus-repo-github-action@master
+      with:
+        serverUrl: http://localhost:8081/repository/maven-central/
+        username: admin
+        password: ${{ secrets.password }}
+        format: maven2
+        repository: maven-central
+        coordinates: groupId=com.devonfw artifactId=app version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+        assets: extension=tar.gz
+        filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
+  # create release
   release:
     needs: [test-windows, test-macos, test-ubuntu, build]
     runs-on: ubuntu-latest
     steps:      
-      # Create release 
+      # Create github release with the specified tag, name and body
       - name: create gitHub release
         uses: ncipollo/release-action@v1
         with:
