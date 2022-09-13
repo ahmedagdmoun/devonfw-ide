@@ -37,9 +37,9 @@ jobs:
           password: ${{ secrets.password }}
           format: maven2
           repository: maven-central
-          coordinates: groupId=com.devonfw artifactId=app version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          assets: extension=tar.gz
-          filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
+          coordinates: groupId=com.devonfw artifactId=devonfw-ide-scripts version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          assets: extension=jar
+        filename: ./target/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.jar
   # create release
   release:
     needs: build
