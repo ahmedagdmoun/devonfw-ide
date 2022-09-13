@@ -39,7 +39,7 @@ jobs:
           repository: maven-central
           coordinates: groupId=com.devonfw artifactId=devonfw-ide-scripts version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
           assets: extension=jar
-          filename: ./target/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.jar
+          filename: target/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.jar
   # create release
   release:
     needs: build
