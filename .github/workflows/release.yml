@@ -29,17 +29,17 @@ jobs:
           java-version: '11'
       - name: Build project with Maven
         run: mvn -B -ntp install
-    - name: Nexus Repo Publish
-      uses: sonatype-nexus-community/nexus-repo-github-action@master
-      with:
-        serverUrl: http://localhost:8081/repository/maven-central/
-        username: admin
-        password: ${{ secrets.password }}
-        format: maven2
-        repository: maven-central
-        coordinates: groupId=com.devonfw artifactId=app version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-        assets: extension=tar.gz
-        filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
+      - name: Nexus Repo Publish
+        uses: sonatype-nexus-community/nexus-repo-github-action@master
+        with:
+          serverUrl: http://localhost:8081/repository/maven-central/
+          username: admin
+          password: ${{ secrets.password }}
+          format: maven2
+          repository: maven-central
+          coordinates: groupId=com.devonfw artifactId=app version=${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          assets: extension=tar.gz
+          filename: ./devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
   # create release
   release:
     needs: build
