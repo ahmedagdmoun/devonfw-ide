@@ -24,11 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Export GPG Key
-        run: |
-          gpg --armor --export-secret-keys D0DF6B419EAECB769CC75789CDFACB0CF0AD43FB
-          gpg --list-secret-keys --keyid-format LONG
-
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v3
         with: # running setup-java again overwrites the settings.xml
