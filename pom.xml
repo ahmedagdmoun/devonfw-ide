@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.devonfw</groupId>
     <artifactId>maven-parent</artifactId>
     <version>9</version>
   </parent>
-  <groupId>com.devonfw.tools.ide.dev</groupId>
+  <groupId>io.github.ahmedagdmoun</groupId>
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
   <version>dev-SNAPSHOT</version>
@@ -19,7 +18,7 @@
     <github.repository>ide</github.repository>
     <devon_ide_version>${revision}</devon_ide_version>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -52,8 +51,105 @@
           <updatePomFile>true</updatePomFile>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <!-- version errors on win with "no pinentry" -->
+        <!-- <version>3.0.1</version> -->
+        <version>1.6</version>
+        <configuration>
+          <keyname>${gpg.keyname}</keyname>
+        </configuration>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <name>Sonartype Releases</name>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <name>Sonartype Snapshots</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>ossrh</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
 
   <developers>
     <developer>
@@ -61,74 +157,74 @@
       <name>J&#246;rg Hohwiller</name>
       <email>hohwille@users.sourceforge.net</email>
       <organization>Capgemini</organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>admin</role>
         <role>designer</role>
         <role>developer</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
     <developer>
       <id>trippl</id>
       <name>Thomas Rippl</name>
       <email></email>
       <organization></organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>developer</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
     <developer>
       <id>markusschuh</id>
       <name>Markus Schuh</name>
       <email></email>
       <organization>Capgemini</organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>contributor</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
     <developer>
       <id>maybeec</id>
       <name>Malte Brunnlieb</name>
       <email></email>
       <organization>Capgemini</organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>contributor</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
     <developer>
       <id>ediekman</id>
       <name>Erik Diekmann</name>
       <email></email>
       <organization>Capgemini</organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>contributor</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
     <developer>
       <id>nricheton</id>
       <name>Nicolas Richeton</name>
       <email></email>
       <organization>Capgemini</organization>
-      <organizationUrl/>
+      <organizationUrl />
       <roles>
         <role>contributor</role>
       </roles>
       <timezone>+1</timezone>
-      <properties/>
+      <properties />
     </developer>
   </developers>
 </project>
