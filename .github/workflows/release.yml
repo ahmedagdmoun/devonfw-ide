@@ -16,31 +16,51 @@ on:
         required: true
 
 jobs:
-  publish:
+  release:
+    name: Release on Sonatype OSS
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Java for publishing to Maven Central Repository
+
+      - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
-          server-id: ossrh
+          java-version: 11
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.GPG_SIGNING_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+
+      - name: Set up Apache Maven Central
+        uses: actions/setup-java@v1
+        with: # running setup-java again overwrites the settings.xml
+          java-version: 11
+          server-id: repository
           server-username: SONATYPE_USERNAME
           server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
-      - name: build artifact
-        run: mvn clean package
-      
-      - name: Publish to the Maven Central Repository
+
+      - name: Publish to Apache Maven Central
         run: |
-          mvn \
+          mvn -Prelease \
             --no-transfer-progress \
             --batch-mode \
-            deploy
+            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
+            verify deploy
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_TOKEN }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       
       # Create github release with the specified tag, name and body
