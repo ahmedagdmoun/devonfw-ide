@@ -53,6 +53,7 @@
               <nonFilteredFileExtensions>
                 <nonFilteredFileExtension>reg</nonFilteredFileExtension>
                 <nonFilteredFileExtension>plist</nonFilteredFileExtension>
+                <nonFilteredFileExtension>strings</nonFilteredFileExtension>
               </nonFilteredFileExtensions>
               <includeEmptyDirs>true</includeEmptyDirs>
               <delimiters>
