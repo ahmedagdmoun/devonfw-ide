@@ -9,10 +9,6 @@
   <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
-  <properties>
-    <github.repository>ide</github.repository>
-    <devon_ide_version>${revision}</devon_ide_version>
-  </properties>
 
   <dependencies>
     <dependency>
