@@ -42,9 +42,8 @@ jobs:
           job-status: success
 
       - name: Publish to Apache Maven Central
-        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run:
-          mvn clean deploy --no-transfer-progress --batch-mode -Darguments=-Dgpg.passphrase=${GPG_PASSPHRASE}
+          mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_TOKEN }}
