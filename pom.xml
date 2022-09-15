@@ -2,23 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>io.github.ahmedagdmoun</groupId>
-    <artifactId>maven-parent</artifactId>
-    <version>9</version>
-  </parent>
 
   <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
   <version>dev-SNAPSHOT</version>
-  <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
   <properties>
-    <github.repository>ide</github.repository>
-    <devon_ide_version>${revision}</devon_ide_version>
+    <revision>2022.02.008-SNAPSHOT</revision>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <github.project>ahmedagdmoun/devonfw-ide</github.project>
+    <flatten.mode>ossrh</flatten.mode>
+    <slf4j.version>1.7.30</slf4j.version>
+    <skip.deployment>true</skip.deployment>
+    <java.version>1.8</java.version>
+    <tycho.version>1.6.0</tycho.version>
+    <jaxb.version>3.0.1</jaxb.version>
+    <jacoco.version>0.8.8</jacoco.version>
+    <license.skipAggregateDownloadLicenses>${skip.deployment}</license.skipAggregateDownloadLicenses>
+    <nexus.staging.maven.plugin.version>1.6.8</nexus.staging.maven.plugin.version>
   </properties>
+
+  <scm>
+    <connection>scm:git:git@github.com:${github.project}.git</connection>
+    <developerConnection>scm:git:git@github.com:${github.project}.git</developerConnection>
+    <url>git@github.com:${github.project}.git</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache Software License 2.0</name>
+      <url>https://raw.githubusercontent.com/devonfw/.github/master/LICENSE</url>
+      <distribution>repo</distribution>
+      <comments />
+    </license>
+  </licenses>
+
 
   <dependencies>
     <dependency>

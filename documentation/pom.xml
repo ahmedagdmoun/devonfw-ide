@@ -2,11 +2,6 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>io.github.ahmedagdmoun.tools</groupId>
-    <artifactId>devonfw-docgen-pdf</artifactId>
-    <version>2021.12.002</version>
-  </parent>
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-doc</artifactId>
   <version>${revision}</version>
@@ -18,6 +13,33 @@
     <docgen.asciidoc.page>devonfw-ide-doc</docgen.asciidoc.page>
     <revision>dev-SNAPSHOT</revision>
   </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <name>Sonartype Releases</name>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <name>Sonartype Snapshots</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>ossrh</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
 
   <!-- run "mvn package" and get the PDF result in target/generated-docs/*.pdf -->
 </project>
