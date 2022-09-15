@@ -16,9 +16,28 @@ on:
         required: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - name: Build project with Maven
+        run: mvn -B -ntp install
+      - name: Deploy to OSSRH nexus
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        run: mvn --settings .mvn/settings.xml -DskipTests=true -Darchetype.test.skip=true -Dmaven.install.skip=true -B -ntp deploy
+
   release:
+    needs: build
     name: Release on Sonatype OSS
-    needs: ahmedagdmoun/devonfw-ide/.github/workflows/build.yml@test
     runs-on: ubuntu-latest
 
     steps:
