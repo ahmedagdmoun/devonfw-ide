@@ -133,17 +133,11 @@
   </build>
 
   <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <name>Sonartype Releases</name>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
     <snapshotRepository>
-      <id>ossrh</id>
-      <name>Sonartype Snapshots</name>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        <id>ossrh</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
-  </distributionManagement>
+    </distributionManagement>
 
   <repositories>
     <repository>
