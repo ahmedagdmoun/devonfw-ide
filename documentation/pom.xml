@@ -3,11 +3,11 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.devonfw.tools</groupId>
+    <groupId>io.github.ahmedagdmoun.tools</groupId>
     <artifactId>devonfw-docgen-pdf</artifactId>
     <version>2021.12.002</version>
   </parent>
-  <groupId>com.devonfw.tools.ide</groupId>
+  <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-doc</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
