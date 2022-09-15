@@ -4,9 +4,9 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.github.ahmedagdmoun</groupId>
+    <groupId>com.devonfw.tools.ide.dev</groupId>
     <artifactId>devonfw-ide</artifactId>
-    <!--<version>dev-SNAPSHOT</version>-->
+    <version>dev-SNAPSHOT</version>
   </parent>
   <artifactId>devonfw-ide-eclipse-m2e</artifactId>
   <packaging>jar</packaging>
