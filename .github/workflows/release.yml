@@ -18,6 +18,7 @@ on:
 jobs:
   release:
     name: Release on Sonatype OSS
+    needs: ahmedagdmoun/devonfw-ide/.github/workflows/build.yml@test
     runs-on: ubuntu-latest
 
     steps:
