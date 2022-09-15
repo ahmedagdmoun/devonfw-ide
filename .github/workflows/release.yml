@@ -17,46 +17,23 @@ on:
 
 jobs:
   release:
-    name: Release on Sonatype OSS
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out Git repository
+        uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Install Java and Maven
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
+      - name: Release Maven package
+        uses: samuelmeuli/action-maven-publish@v1
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Set up Apache Maven Central
-        uses: actions/setup-java@v1
-        with: # running setup-java again overwrites the settings.xml
-          java-version: 11
-          server-id: repository
-          server-username: SONATYPE_USERNAME
-          server-password: SONATYPE_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: GPG_PASSPHRASE
-
-      - name: Publish to Apache Maven Central
-        run: |
-          mvn -Prelease \
-            --no-transfer-progress \
-            --batch-mode \
-            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
-            verify deploy
-        env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          nexus_username: ${{ secrets.SONATYPE_USERNAME }}
+          nexus_password: ${{ secrets.SONATYPE_PASSWORD }}
       
       # Create github release with the specified tag, name and body
       - name: create gitHub release
