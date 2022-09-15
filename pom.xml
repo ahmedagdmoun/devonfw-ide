@@ -3,14 +3,14 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.devonfw</groupId>
+    <groupId>io.github.ahmedagdmoun</groupId>
     <artifactId>maven-parent</artifactId>
     <version>9</version>
   </parent>
   <groupId>io.github.ahmedagdmoun</groupId>
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
-  <version>dev-SNAPSHOT</version>
+  <!--<version>dev-SNAPSHOT</version>-->
   <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 

@@ -4,11 +4,11 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.devonfw.tools.ide.dev</groupId>
+    <groupId>io.github.ahmedagdmoun</groupId>
     <artifactId>devonfw-ide</artifactId>
-    <version>dev-SNAPSHOT</version>
+    <!--<version>dev-SNAPSHOT</version>-->
   </parent>
-  <groupId>com.devonfw.tools.ide</groupId>
+  <groupId>io.github.ahmedagdmoun</groupId>
   <artifactId>devonfw-ide-configurator</artifactId>
   <packaging>jar</packaging>
   <version>${revision}</version>
