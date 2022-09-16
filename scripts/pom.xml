@@ -204,8 +204,6 @@
                   <goal>sign</goal>
                 </goals>
                 <configuration>
-                  <keyname>0xF0AD43FB</keyname>
-                  <passphraseServerId>0xF0AD43FB</passphraseServerId>
                   <gpgArguments>
                       <arg>--pinentry-mode</arg>
                       <arg>loopback</arg>
