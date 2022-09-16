@@ -43,7 +43,6 @@ jobs:
 
       - name: Publish to Apache Maven Central
         run:
-          curl --fail -u agdmoun:SonaType6672-- --upload-file devonfw-ide-doc-2022.08.002.pdf https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/io/github/ahmedagdmoun/tools/ide/devonfw-ide-doc/2022.08.002/
           mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
