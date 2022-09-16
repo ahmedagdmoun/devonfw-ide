@@ -9,21 +9,6 @@
   <version>dev-SNAPSHOT</version>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
-  <scm>
-    <connection>scm:git:git@github.com:${github.project}.git</connection>
-    <developerConnection>scm:git:git@github.com:${github.project}.git</developerConnection>
-    <url>git@github.com:${github.project}.git</url>
-  </scm>
-
-  <licenses>
-    <license>
-      <name>Apache Software License 2.0</name>
-      <url>https://raw.githubusercontent.com/devonfw/.github/master/LICENSE</url>
-      <distribution>repo</distribution>
-      <comments />
-    </license>
-  </licenses>
-
 
   <dependencies>
     <dependency>
@@ -143,6 +128,23 @@
       </releases>
     </repository>
   </repositories>
+
+  <url>https://github.com/${github.project}</url>
+
+  <scm>
+    <connection>scm:git:git@github.com:${github.project}.git</connection>
+    <developerConnection>scm:git:git@github.com:${github.project}.git</developerConnection>
+    <url>git@github.com:${github.project}.git</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache Software License 2.0</name>
+      <url>https://raw.githubusercontent.com/devonfw/.github/master/LICENSE</url>
+      <distribution>repo</distribution>
+      <comments />
+    </license>
+  </licenses>
 
   <developers>
     <developer>
