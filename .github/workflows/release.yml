@@ -44,7 +44,10 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           gpg --keyserver hkp://keyserver.ubuntu.com --send-keys CDFACB0CF0AD43FB
-          mvn -DskipTests deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          gpg -ab devonfw-ide-doc-2022.08.002.pom
+          gpg -ab devonfw-ide-scripts-2022.08.002.pom
+          gpg -ab devonfw-ide-scripts-2022.08.002.tar.gz
+          mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
