@@ -83,6 +83,7 @@
               <overWriteIfNewer>true</overWriteIfNewer>
             </configuration>
           </execution>
+          <!--
           <execution>
             <id>copy-doc</id>
             <phase>package</phase>
@@ -106,6 +107,7 @@
               <overWriteIfNewer>true</overWriteIfNewer>
             </configuration>
           </execution>
+           -->
         </executions>
       </plugin>
       <plugin>
