@@ -9,21 +9,6 @@
   <version>dev-SNAPSHOT</version>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
-  <properties>
-    <revision>2022.02.008-SNAPSHOT</revision>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <github.project>ahmedagdmoun/devonfw-ide</github.project>
-    <flatten.mode>ossrh</flatten.mode>
-    <slf4j.version>1.7.30</slf4j.version>
-    <skip.deployment>true</skip.deployment>
-    <java.version>1.8</java.version>
-    <tycho.version>1.6.0</tycho.version>
-    <jaxb.version>3.0.1</jaxb.version>
-    <jacoco.version>0.8.8</jacoco.version>
-    <license.skipAggregateDownloadLicenses>${skip.deployment}</license.skipAggregateDownloadLicenses>
-    <nexus.staging.maven.plugin.version>1.6.8</nexus.staging.maven.plugin.version>
-  </properties>
-
   <scm>
     <connection>scm:git:git@github.com:${github.project}.git</connection>
     <developerConnection>scm:git:git@github.com:${github.project}.git</developerConnection>
