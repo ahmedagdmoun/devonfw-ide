@@ -52,7 +52,6 @@
             <configuration>
               <nonFilteredFileExtensions>
                 <nonFilteredFileExtension>reg</nonFilteredFileExtension>
-                <nonFilteredFileExtension>plist</nonFilteredFileExtension>
                 <nonFilteredFileExtension>strings</nonFilteredFileExtension>
                 <nonFilteredFileExtension>icns</nonFilteredFileExtension>
               </nonFilteredFileExtensions>
@@ -83,6 +82,7 @@
               <overWriteIfNewer>true</overWriteIfNewer>
             </configuration>
           </execution>
+          <!--
           <execution>
             <id>copy-doc</id>
             <phase>package</phase>
@@ -106,6 +106,7 @@
               <overWriteIfNewer>true</overWriteIfNewer>
             </configuration>
           </execution>
+           -->
         </executions>
       </plugin>
       <plugin>
