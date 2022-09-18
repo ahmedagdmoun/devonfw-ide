@@ -44,7 +44,7 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           gpg --keyserver hkp://keyserver.ubuntu.com --send-keys CDFACB0CF0AD43FB
-          mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn -DskipTests deploy -P release -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
