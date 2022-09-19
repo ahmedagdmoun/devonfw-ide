@@ -44,22 +44,40 @@ jobs:
       - name: Publish to Apache Maven Central
         run: |
           gpg --keyserver hkp://keyserver.ubuntu.com --send-keys CDFACB0CF0AD43FB
-          mvn -DskipTests deploy -P release -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      # Create github release with the specified tag, name and body
-      #- name: create gitHub release
-       # uses: ncipollo/release-action@v1
-        #with:
-         # tag: Release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          #name: ${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          #body: |
+  # Create github release with the specified tag, name and body
+  gitHub_release:
+    name: create github release
+    runs-on: ubuntu-latest
+    needs: release
+    steps:
+      - name: create gitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: Release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          name: ${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
+          body: |
                 # Download
-           #     https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
                 
                 # Changes
-            #    https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
         
+      - name: Checkout
+        uses: actions/checkout@v3
+        run: |
+          source .mvn\maven.config
+          version="${-Drevision}"
+          noDotVersion="${-Drevision//.}"
+          gh release create "${version}" --notes # Download\n
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/"${version}".tar.gz\n\n
+                # Changes\n
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#"${noDotVersion}"
+          git tag Release/"${version}"
+          git push origin test Release/"${version}"
+
