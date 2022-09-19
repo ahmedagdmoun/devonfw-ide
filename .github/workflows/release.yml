@@ -60,9 +60,11 @@ jobs:
         uses: actions/checkout@v3
       - name: create gitHub release
         run: |
-          source .mvn/maven.config
+          source ".mvn/maven.config"
           version="${-Drevision}"
           noDotVersion="${-Drevision//.}"
+          echo "${version}"
+          echo "${noDotVersion}"
           gh release create "${version}" --notes # Download\n
                 https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/"${version}".tar.gz\n\n
                 # Changes\n
