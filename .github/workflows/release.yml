@@ -4,10 +4,6 @@ name: Release
 # Runs manually with major version, minor version and patch as input
 on:
   workflow_dispatch:
-    inputs:
-      Version:
-        description: 'release version'
-        required: true
       
 
 jobs:

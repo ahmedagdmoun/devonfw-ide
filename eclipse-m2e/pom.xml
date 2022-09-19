@@ -3,10 +3,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
+  <parent>
+    <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
+    <artifactId>devonfw-ide</artifactId>
+    <version>dev-SNAPSHOT</version>
+  </parent>
   <artifactId>devonfw-ide-eclipse-m2e</artifactId>
   <packaging>jar</packaging>
-  <version>${revision}</version>
   <name>${project.artifactId}</name>
   <description>Maven example project to trigger/enforce the installation of m2e plugins</description>
 
@@ -31,169 +34,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>1.3.0</version>
-        <configuration>
-          <updatePomFile>true</updatePomFile>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.0.1</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-            <configuration>
-              <gpgArguments>
-                  <arg>--pinentry-mode</arg>
-                  <arg>loopback</arg>
-              </gpgArguments>
-          </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>ossrh</id>
-      <name>OSSRH Snapshots</name>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
-  <url>https://github.com/${github.project}</url>
-
-  <scm>
-    <connection>scm:git:git@github.com:${github.project}.git</connection>
-    <developerConnection>scm:git:git@github.com:${github.project}.git</developerConnection>
-    <url>git@github.com:${github.project}.git</url>
-  </scm>
-
-  <licenses>
-    <license>
-      <name>Apache Software License 2.0</name>
-      <url>https://raw.githubusercontent.com/devonfw/.github/master/LICENSE</url>
-      <distribution>repo</distribution>
-      <comments />
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <id>hohwille</id>
-      <name>J&#246;rg Hohwiller</name>
-      <email>hohwille@users.sourceforge.net</email>
-      <organization>Capgemini</organization>
-      <organizationUrl />
-      <roles>
-        <role>admin</role>
-        <role>designer</role>
-        <role>developer</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-    <developer>
-      <id>trippl</id>
-      <name>Thomas Rippl</name>
-      <email></email>
-      <organization></organization>
-      <organizationUrl />
-      <roles>
-        <role>developer</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-    <developer>
-      <id>markusschuh</id>
-      <name>Markus Schuh</name>
-      <email></email>
-      <organization>Capgemini</organization>
-      <organizationUrl />
-      <roles>
-        <role>contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-    <developer>
-      <id>maybeec</id>
-      <name>Malte Brunnlieb</name>
-      <email></email>
-      <organization>Capgemini</organization>
-      <organizationUrl />
-      <roles>
-        <role>contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-    <developer>
-      <id>ediekman</id>
-      <name>Erik Diekmann</name>
-      <email></email>
-      <organization>Capgemini</organization>
-      <organizationUrl />
-      <roles>
-        <role>contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-    <developer>
-      <id>nricheton</id>
-      <name>Nicolas Richeton</name>
-      <email></email>
-      <organization>Capgemini</organization>
-      <organizationUrl />
-      <roles>
-        <role>contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-      <properties />
-    </developer>
-  </developers>
-  
 </project>
