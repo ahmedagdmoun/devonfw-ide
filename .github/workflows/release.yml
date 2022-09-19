@@ -56,20 +56,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: release
     steps:
-      - name: create gitHub release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: Release/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          name: ${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}
-          body: |
-                # Download
-                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}/devonfw-ide-scripts-${{ github.event.inputs.major }}.${{ github.event.inputs.minor }}.${{ github.event.inputs.patch }}.tar.gz
-                
-                # Changes
-                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${{ github.event.inputs.major }}${{ github.event.inputs.minor }}${{ github.event.inputs.patch }}
-        
       - name: Checkout
         uses: actions/checkout@v3
+      - name: create gitHub release
         run: |
           source .mvn\maven.config
           version="${-Drevision}"
