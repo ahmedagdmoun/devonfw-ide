@@ -64,12 +64,10 @@ jobs:
           prefix="-Drevision="
           version=${maven_config#"$prefix"}
           noDotVersion="${version//.}"
-          echo "${version}"
-          echo "${noDotVersion}"
-          gh release create "${version}" --notes # Download\n
-                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/"${version}".tar.gz\n\n
+          gh release create ${version} --notes "# Download\n
+                https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${version}.tar.gz\n\n
                 # Changes\n
-                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#"${noDotVersion}"
+                https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
           git tag Release/"${version}"
           git push origin test Release/"${version}"
 
