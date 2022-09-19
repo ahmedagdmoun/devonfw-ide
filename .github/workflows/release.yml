@@ -61,9 +61,7 @@ jobs:
       - name: create gitHub release
         run: |
           ls -a
-          cd .mvn/
-          ls
-          source maven.config
+          source /home/runner/work/devonfw-ide/devonfw-ide/.mvn/maven.config
           version="${-Drevision}"
           noDotVersion="${-Drevision//.}"
           echo "${version}"
