@@ -57,13 +57,12 @@ jobs:
     needs: release
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
       - name: create gitHub release
         run: |
-          pwd
-          ls
-          version="${revision}"
-          noDotVersion="${revision//.}"
+          source .mvn/maven.config
+          version="${-Drevision}"
+          noDotVersion="${-Drevision//.}"
           echo "${version}"
           echo "${noDotVersion}"
           gh release create "${version}" --notes # Download\n
