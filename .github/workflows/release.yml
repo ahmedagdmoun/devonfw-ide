@@ -62,9 +62,8 @@ jobs:
         run: |
           pwd
           ls
-          source ".mvn/maven.config"
-          version="${-Drevision}"
-          noDotVersion="${-Drevision//.}"
+          version="${revision}"
+          noDotVersion="${revision//.}"
           echo "${version}"
           echo "${noDotVersion}"
           gh release create "${version}" --notes # Download\n
