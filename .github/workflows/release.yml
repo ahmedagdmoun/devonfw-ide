@@ -5,15 +5,10 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      major:
-        description: 'major version'
+      Version:
+        description: 'release version'
         required: true
-      minor:
-        description: 'minor version'
-        required: true
-      patch:
-        description: 'patch'
-        required: true
+      
 
 jobs:
   release:
