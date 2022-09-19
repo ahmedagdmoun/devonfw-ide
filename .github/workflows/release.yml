@@ -61,6 +61,9 @@ jobs:
       - name: create gitHub release
         run: |
           ls -a
+          cd .mvn/
+          ls
+          source maven.config
           version="${-Drevision}"
           noDotVersion="${-Drevision//.}"
           echo "${version}"
