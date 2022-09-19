@@ -60,10 +60,10 @@ jobs:
         uses: actions/checkout@v3
       - name: create gitHub release
         run: |
-          ls -a
-          source /home/runner/work/devonfw-ide/devonfw-ide/.mvn/maven.config
-          version="${-Drevision}"
-          noDotVersion="${-Drevision//.}"
+          maven_config="$(cat /home/runner/work/devonfw-ide/devonfw-ide/.mvn/maven.config)"
+          prefix="-Drevision="
+          version=${maven_config#"$prefix"}
+          noDotVersion="${version//.}"
           echo "${version}"
           echo "${noDotVersion}"
           gh release create "${version}" --notes # Download\n
