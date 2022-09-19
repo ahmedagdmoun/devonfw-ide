@@ -60,7 +60,7 @@ jobs:
           version=${maven_config#"$prefix"}
           noDotVersion="${version//.}"
           gh release create ${version} --notes "# Download
-          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/2022.09.002/devonfw-ide-scripts-${version}.tar.gz
+          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${version}/devonfw-ide-scripts-${version}.tar.gz
 
           # Changes
           https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
