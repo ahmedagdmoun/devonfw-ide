@@ -104,9 +104,15 @@
   </build>
 
   <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <name>Sonartype Releases</name>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
     <snapshotRepository>
       <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      <name>Sonartype Snapshots</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -217,10 +223,4 @@
       <properties />
     </developer>
   </developers>
-
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties>
-
 </project>
