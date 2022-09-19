@@ -70,4 +70,6 @@ jobs:
                 https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
           git tag Release/"${version}"
           git push origin test Release/"${version}"
+        env:
+          GH_TOKEN: ${{ secrets.GHA_TOKEN }}
 
