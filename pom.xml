@@ -53,6 +53,8 @@
           <stagingProfileId>15fbdd4edb1003</stagingProfileId>
           <serverId>ossrh</serverId>
           <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>false</autoReleaseAfterClose>
+          <autoDropAfterRelease>false</autoDropAfterRelease>
         </configuration>
       </plugin>
       <plugin>
