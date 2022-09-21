@@ -3,12 +3,13 @@
 <settings>
   <servers>
     <server>
-      <id>ossrh</id>
+      <id>repository</id>
       <username>${env.SONATYPE_USERNAME}</username>
       <password>${env.SONATYPE_PASSWORD}</password>
     </server>
     <server>
-      <id>gpg.passphrase</id>
-      <passphrase>${env.MAVEN_GPG_PASSPHRASE}</passphrase>
+      <id>ossrh</id>
+      <username>${env.SONATYPE_USERNAME}</username>
+      <password>${env.SONATYPE_PASSWORD}</password>
     </server>
 </settings>
