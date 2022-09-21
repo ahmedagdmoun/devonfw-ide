@@ -8,7 +8,7 @@
     <artifactId>devonfw-ide</artifactId>
     <version>${revision}</version>
   </parent>
-  <groupId>com.devonfw.tools.ide</groupId>
+  <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-configurator</artifactId>
   <packaging>jar</packaging>
   <version>${revision}</version>
