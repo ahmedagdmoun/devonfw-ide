@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
     <artifactId>devonfw-ide</artifactId>
-    <version>${revision}</version>
+    <version>2022.09.006</version>
   </parent>
   <groupId>com.devonfw.tools.ide</groupId>
   <artifactId>devonfw-ide-configurator</artifactId>
