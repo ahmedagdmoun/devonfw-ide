@@ -28,6 +28,10 @@ include::dotnet.asciidoc[leveloffset=3]
 
 include::eclipse.asciidoc[leveloffset=3]
 
+include::gcviewer.asciidoc[leveloffset=3]
+
+include::gh.asciidoc[leveloffset=3]
+
 include::graalvm.asciidoc[leveloffset=3]
 
 include::gradle.asciidoc[leveloffset=3]
@@ -49,6 +53,8 @@ include::java.asciidoc[leveloffset=3]
 include::jenkins.asciidoc[leveloffset=3]
 
 include::kubectl.asciidoc[leveloffset=3]
+
+include::lazydocker.asciidoc[leveloffset=3]
 
 include::mvn.asciidoc[leveloffset=3]
 
