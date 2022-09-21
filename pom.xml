@@ -7,6 +7,7 @@
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
   <version>${revision}</version>
+  <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
 
