@@ -6,7 +6,7 @@
   <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
-  <version>2022.09.006</version>
+  <version>${revision}</version>
   <description>This project provides automatic setup and update of the local development environment.</description>
 
 
