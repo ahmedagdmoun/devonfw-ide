@@ -26,7 +26,7 @@ jobs:
 
       - name: Publish to Apache Maven Central
         run: |
-          export GPG_TTY=$(tty)
+          gpg --armor --export-secret-keys D0DF6B419EAECB769CC75789CDFACB0CF0AD43FB
           mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
