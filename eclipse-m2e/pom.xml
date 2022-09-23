@@ -4,14 +4,14 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
+    <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
     <artifactId>devonfw-ide</artifactId>
-    <version>${revision}</version>
+    <version>dev-SNAPSHOT</version>
   </parent>
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-eclipse-m2e</artifactId>
   <packaging>jar</packaging>
-  <version>${revision}</version>
+  <version>dev-SNAPSHOT</version>
   <name>${project.artifactId}</name>
   <description>Maven example project to trigger/enforce the installation of m2e plugins</description>
 

@@ -4,9 +4,9 @@
   
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.github.ahmedagdmoun.tools.ide.dev</groupId>
+    <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
     <artifactId>devonfw-ide</artifactId>
-    <version>${revision}</version>
+    <version>dev-SNAPSHOT</version>
   </parent>
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-settings</artifactId>

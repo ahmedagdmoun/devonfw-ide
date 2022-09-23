@@ -21,15 +21,12 @@ jobs:
           java-version: 11
           distribution: 'temurin'
           cache: 'maven'
-          server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
-          server-username: SONATYPE_USERNAME # env variable for username in deploy
-          server-password: SONATYPE_PASSWORD # env variable for token in deploy
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
           gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
 
       - name: Publish to Apache Maven Central
         run: |
-          mvn -DskipTests deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
