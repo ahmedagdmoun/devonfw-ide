@@ -30,20 +30,13 @@ jobs:
           suffix="-SNAPSHOT"
           release_version=${snapshot_version%"$suffix"}
           sed -i "s/${snapshot_version}/${release_version}/" .mvn/maven.config
-          mvn --settings .mvn/settings.xml -DskipTests=true deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-  # Create github release with the specified tag, name and body
-  gitHub_release:
-    name: create github release
-    runs-on: ubuntu-latest
-    needs: release
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # Create github release with the specified tag, name and body
       - name: create gitHub release
         run: |
           maven_config="$(cat .mvn/maven.config)"
