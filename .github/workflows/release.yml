@@ -26,7 +26,7 @@ jobs:
 
       - name: Publish to Apache Maven Central
         run: |
-          mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          mvn --settings .mvn/settings.xml -DskipTests=true deploy -Pdeploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
