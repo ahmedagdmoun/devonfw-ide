@@ -39,19 +39,19 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       # Create github release with the specified tag, name and body
-      - name: create gitHub release
-        run: |
-          maven_config="$(cat .mvn/maven.config)"
-          prefix="-Drevision="
-          version=${maven_config#"$prefix"}
-          noDotVersion="${version//.}"
-          gh release create ${version} --notes "# Download
-          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${version}/devonfw-ide-scripts-${version}.tar.gz
+      #- name: create gitHub release
+       # run: |
+        #  maven_config="$(cat .mvn/maven.config)"
+         # prefix="-Drevision="
+          #version=${maven_config#"$prefix"}
+          #noDotVersion="${version//.}"
+          #gh release create ${version} --notes "# Download
+          #https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${version}/devonfw-ide-scripts-${version}.tar.gz
 
           # Changes
-          https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
-          git tag Release/"${version}"
-          git push origin test Release/"${version}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
+          #git tag Release/"${version}"
+          #git push origin test Release/"${version}"
+        #env:
+         # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
