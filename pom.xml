@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.github.ahmedagdmoun</groupId>
     <artifactId>maven-parent</artifactId>
-    <version>18</version>
+    <version>15</version>
   </parent>
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide</artifactId>
@@ -42,6 +42,27 @@
     <module>settings</module>
     <module>eclipse-m2e</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.13</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>repository</serverId>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
