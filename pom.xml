@@ -11,7 +11,7 @@
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide</artifactId>
   <packaging>pom</packaging>
-  <version>dev-SNAPSHOT</version>
+  <version>${revision}</version>
   <name>${project.artifactId}</name>
   <description>This project provides automatic setup and update of the local development environment.</description>
 

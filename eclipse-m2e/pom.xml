@@ -11,7 +11,7 @@
   <groupId>io.github.ahmedagdmoun.tools.ide</groupId>
   <artifactId>devonfw-ide-eclipse-m2e</artifactId>
   <packaging>jar</packaging>
-  <version>dev-SNAPSHOT</version>
+  <version>${revision}</version>
   <name>${project.artifactId}</name>
   <description>Maven example project to trigger/enforce the installation of m2e plugins</description>
 
