@@ -42,33 +42,26 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      # Create github tag and release
-      - name: create gitHub release & set next version
+      # Set next version & create github release
+      - name: set next version & create gitHub release
         run: |
           version="$(cat version)"
           prefix="-Drevision="
           release_version=${version#"$prefix"}
-          sed -i "s/${version}/${release_version}/" version
-          noDotVersion="${release_version//.}"
-          release_tag="Release/${release_version}"
-          git tag "${release_tag}"
-          git push origin master "${release_tag}"
-          gh release create "${release_tag}" --notes "# Download
-          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${release_version}/devonfw-ide-scripts-${release_version}.tar.gz
-          # Changes
-          https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      # set next version for next release
-      - name: set next version
-        run: |
-          release_version="$(cat version)"
           next_version="${{ github.event.inputs.next-version }}-SNAPSHOT"
           sed -i "s/${release_version}/${next_version}/" .mvn/maven.config
           git add -f .mvn/maven.config
           git commit -m "set next version to ${next_version}"
-          git push origin master
+          git push
+
+          noDotVersion="${release_version//.}"
+          release_tag="Release/${release_version}"
+          git tag "${release_tag}"
+          git push --tags
+          gh release create "${release_tag}" --notes "# Download
+          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${release_version}/devonfw-ide-scripts-${release_version}.tar.gz
+          # Changes
+          https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
