@@ -34,6 +34,7 @@ jobs:
           snapshot_version="${maven_config%% *}"
           suffix="-SNAPSHOT"
           version=${snapshot_version%"$suffix"}
+          echo "${version}" > version
           sed -i "s/${snapshot_version}/${version}/" .mvn/maven.config
           mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.pin.entry.mode=loopback -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
@@ -41,11 +42,13 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      # Create github release with the specified tag, name and body
-      - name: create gitHub release
+      # Create github tag and release
+      - name: create gitHub release & set next version
         run: |
+          version="$(cat version)"
           prefix="-Drevision="
           release_version=${version#"$prefix"}
+          sed -i "s/${version}/${release_version}/" version
           noDotVersion="${release_version//.}"
           release_tag="Release/${release_version}"
           git tag "${release_tag}"
@@ -60,6 +63,7 @@ jobs:
       # set next version for next release
       - name: set next version
         run: |
+          release_version="$(cat version)"
           next_version="${{ github.event.inputs.next-version }}-SNAPSHOT"
           sed -i "s/${release_version}/${next_version}/" .mvn/maven.config
           git add -f .mvn/maven.config
