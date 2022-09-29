@@ -1,11 +1,13 @@
-# Name of the workflow
 name: Release
 
-# Runs manually with major version, minor version and patch as input
+# Runs manually
 on:
   workflow_dispatch:
+    inputs:
+      next-version:
+        description: 'next version to be set'
+        required: true
       
-
 jobs:
   release:
     name: Release on Sonatype OSS
@@ -14,12 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v3
-        with: # running setup-java again overwrites the settings.xml
+        with:
           java-version: 11
           distribution: 'temurin'
           cache: 'maven'
@@ -31,28 +31,38 @@ jobs:
           maven_config="$(cat .mvn/maven.config)"
           snapshot_version="${maven_config%% *}"
           suffix="-SNAPSHOT"
-          release_version=${snapshot_version%"$suffix"}
-          sed -i "s/${snapshot_version}/${release_version}/" .mvn/maven.config
-          mvn --settings .mvn/settings.xml deploy -Pdeploy,release -Dgpg.pin.entry.mode=loopback -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+          version=${snapshot_version%"$suffix"}
+          sed -i "s/${snapshot_version}/${version}/" .mvn/maven.config
+          mvn --settings .mvn/settings.xml deploy -Pdeploy -Dgpg.pin.entry.mode=loopback -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       # Create github release with the specified tag, name and body
-      #- name: create gitHub release
-       # run: |
-        #  maven_config="$(cat .mvn/maven.config)"
-         # prefix="-Drevision="
-          #version=${maven_config#"$prefix"}
-          #noDotVersion="${version//.}"
-          #gh release create ${version} --notes "# Download
-          #https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${version}/devonfw-ide-scripts-${version}.tar.gz
-
+      - name: create gitHub release
+        run: |
+          prefix="-Drevision="
+          release_version=${version#"$prefix"}
+          noDotVersion="${release_version//.}"
+          release_tag="Release/${release_version}"
+          git tag "${release_tag}"
+          git push origin master "${release_tag}"
+          gh release create "${release_tag}" --notes "# Download
+          https://repo1.maven.org/maven2/com/devonfw/tools/ide/devonfw-ide-scripts/${release_version}/devonfw-ide-scripts-${release_version}.tar.gz
           # Changes
-          #https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
-          #git tag Release/"${version}"
-          #git push origin test Release/"${version}"
-        #env:
-         # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          https://github.com/devonfw/ide/blob/master/CHANGELOG.asciidoc#${noDotVersion}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+      # set next version for next release
+      - name: set next version
+        run: |
+          next_version="${{ github.event.inputs.next-version }}-SNAPSHOT"
+          sed -i "s/${release_version}/${next_version}/" .mvn/maven.config
+          git add -f .mvn/maven.config
+          git commit -m "set next version to ${next_version}"
+          git push origin master
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
