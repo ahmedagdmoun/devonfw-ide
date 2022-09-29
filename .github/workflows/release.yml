@@ -28,7 +28,8 @@ jobs:
 
       - name: Publish to Apache Maven Central
         run: |
-          snapshot_version="$(cat .mvn/maven.config)"
+          maven_config="$(cat .mvn/maven.config)"
+          snapshot_version="${maven_config%% *}"
           suffix="-SNAPSHOT"
           release_version=${snapshot_version%"$suffix"}
           sed -i "s/${snapshot_version}/${release_version}/" .mvn/maven.config
