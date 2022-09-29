@@ -52,7 +52,7 @@ jobs:
           sed -i "s/${release_version}/${next_version}/" .mvn/maven.config
           git add -f .mvn/maven.config
           git commit -m "set next version to ${next_version}"
-          git push
+          git push origin master
 
           noDotVersion="${release_version//.}"
           release_tag="Release/${release_version}"
