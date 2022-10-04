@@ -1,7 +1,6 @@
 name: Integration Test Ubuntu
 on: 
-  schedule:
-   - cron: '0 3 * * *'
+  workflow_dispatch:
 jobs:
   verify_commit:
     runs-on: ubuntu-latest
