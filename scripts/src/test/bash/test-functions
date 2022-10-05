@@ -6,3 +6,7 @@ function doCommandTest()  {
   "${CLI}" "${1}" setup
   exit "${?}"
 }
+
+function doConvertTime() {
+    echo "The test took $(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))s"
+}

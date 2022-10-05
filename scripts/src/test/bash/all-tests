@@ -8,6 +8,7 @@ function doTests() {
 for testpath in "$(dirname $0)"/"${1}"-*
 do
   testcase="${testpath/*\//}"
+  start_time=$SECONDS
   echo "Running test #${total}: ${testcase}"
   mkdir -p "${testcase}/conf"
   cd "${testcase}"
@@ -22,6 +23,9 @@ do
     echo "[ERROR] Failed running test #${total}: ${testcase} - exit code ${result}"
     let "failure++"
   fi
+  end_time=$SECONDS
+  duration=$(( end_time - start_time ))
+  doConvertTime "${duration}"
   let "total++"
   cd ..
 done
