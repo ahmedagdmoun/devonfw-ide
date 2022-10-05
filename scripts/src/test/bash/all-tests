@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "${0}")"/test-functions
+
 success=0
 failure=0
 total=0
